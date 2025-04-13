@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Temperatura e Umidade</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+
+
+.painel {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.grafico {
+    background: #fff;
+    padding: 20px;
+    width: 500px;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="painel">
+    <div class="grafico">
+      <canvas id="graficoLinha"></canvas>
+    </div>
+    <div class="grafico">
+      <canvas id="graficoBarra"></canvas>
+    </div>
+  </div>
+
+
+</body>
+  <script>
+    const corTemperatura = ' rgb(253, 53, 96)'; 
+    const corUmidade = 'rgb(2, 143, 296)';
+
+    // Gráfico de linha
+    const ctxLinha = document.getElementById('graficoLinha');
+    new Chart(ctxLinha, {
+      type: 'line',
+      data: {
+        labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+        datasets: [
+          {
+            label: 'Temperatura',
+            data: [30, 29, 28, 25, 22, 23],
+            borderColor: corTemperatura,
+            backgroundColor: corTemperatura,
+            tension: 0.4,
+            pointRadius: 4,
+            fill: false
+          },
+          {
+            label: 'Umidade',
+            data: [80, 82, 80, 85, 80, 83],
+            borderColor: corUmidade,
+            backgroundColor: corUmidade,
+            tension: 0.4,
+            pointRadius: 4,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+
+    // Gráfico de barras
+    const ctxBarra = document.getElementById('graficoBarra');
+    new Chart(ctxBarra, {
+      type: 'bar',
+      data: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+        datasets: [
+          {
+            label: 'Temperatura Média',
+            data: [22, 24, 27, 23, 20, 18],
+            backgroundColor: corTemperatura
+          },
+          {
+            label: 'Umidade Média',
+            data: [90, 89, 93, 87, 88, 82],
+            backgroundColor: corUmidade
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+  </script>
+</html>
